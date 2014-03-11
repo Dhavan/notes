@@ -1,0 +1,36 @@
+ var hashtags = false;
+	
+    $('#myInputField').keyup(function (e) {
+		
+        arrow = {
+            hashtag: 51,
+            space: 32
+        };
+		
+        var input_field = $(this);
+		
+		$('#msg').html('working. Event code: ' + e.which);
+		switch (e.which) {
+            case arrow.hashtag:
+                input_field.val("<a href='#'>" +input_field.val() + "</a>");
+                hashtags = true;
+                break;
+            case arrow.space:
+                if(hashtags) {
+                    input_field.val(input_field.val() + "</span>");
+                    hashtags = false;
+                }
+                break;
+        }
+
+    });
+	
+<form>
+<input type="hidden">
+<input type="textarea" id="myInputField" />
+</form>
+
+$('#myInputField').blur(function() {
+    // replace hashtags (parsing should prob. be enhanced)
+    $(this).html($(this).html().replace(/(#\S+)/, '<span style="color: blue">$1</span>');
+	});

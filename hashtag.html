@@ -1,0 +1,41 @@
+<html>
+<head>
+<script type="text/javascript" src="js/jQuery.js"></script>
+<style>
+.highlighter{
+color:blue;
+}
+</style>
+</head>
+<body>
+<!--<div contenteditable="true" id="myInputField">-->
+
+<div id='myInputField' contenteditable style="overflow: scroll; border: 1px solid black;">
+<div id='myInputField'>
+<div>
+<span id="msg"></span>
+</div>
+</div>
+</div>
+<script>
+   $(function() {
+	
+    $(document).on('keyup', '#myInputField', function (e) {
+		var str = $(this).html();
+		str = str.replace(/\n/g, '<br>');
+		$('#msg').html(str);
+		if(!str.match(/(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?#([a-zA-Z0-9]+)/g)) {
+				if(!str.match(/#([a-zA-Z0-9]+)#/g)) {
+					str = str.replace(/#([a-zA-Z0-9]+)/g,'<span class="highlighter">#$1</span>');
+				}else{
+					$('#msg').html('we are here');
+					str = str.replace(/#([a-zA-Z0-9]+)#([a-zA-Z0-9]+)/g,'<span class="highhlighter">#$1</span>');
+				}
+				$(this).html(str);
+		}
+    });
+
+});
+</script>
+</body>
+</html>
