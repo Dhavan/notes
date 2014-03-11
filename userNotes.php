@@ -117,10 +117,6 @@ if(login_check($mysqli) == false)
 						<button class="btn" type="submit" onclick="formnote(this.form, this.note);">add</button>
 					</form>
 					
-					<form method="POST" action="try1.php" >
-					<button class="btn btn-primary" type="submit" onclick="try1.php">Create!</button>This is will create a "mind palace" for you(beta)
-					</form>
-					
 				</div>
 			</div>
 			
