@@ -75,7 +75,7 @@
   		      <?php } ?>
   			</div>
 		</div>
-	</nav>
+	   </nav>
 
 	<div class="container-fluid" >
         <div class="jumbotron">

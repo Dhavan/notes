@@ -14,14 +14,9 @@ if(login_check($mysqli) == false)
 	<head>
 		<meta charset="UTF-8">
 		<title><?php echo htmlentities($_SESSION['username']); ?>'s Notes</title>
-		<link rel="stylesheet" href="styles/bootstrap.css">
+		<link rel="stylesheet" href="css/bootstrap.css">
 		
 		<style type="text/css">
-			body {
-				padding-top: 60px;
-				padding-bottom: 40px;
-				background-color: #f5f5f5;
-			}
 			
 			.sidebar-nav {
 				padding: 9px 0;
@@ -37,7 +32,7 @@ if(login_check($mysqli) == false)
 			}
 		</style>
 		
-		<link rel="text/javascript" href="styles/bootstrap-responsive">
+		<link rel="text/javascript" href="css/bootstrap-responsive">
 		<script type="text/JavaScript" src="js/sha512.js"></script>
 		
 	</head>
@@ -47,14 +42,11 @@ if(login_check($mysqli) == false)
 		<!-- NAVBAR
 		================================================== -->
     
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<div class="navbar-inner">
-				<div class="container-fluid">
-					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					</button>
+		<nav class="navbar navbar-inverse" role="navigation">
+        	<div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+  
 					<a class="brand" href="index.php">Notes</a>
 					<div class="nav-collapse collapse">
 						<ul class="nav">
@@ -62,11 +54,11 @@ if(login_check($mysqli) == false)
 						<li><a href="about.html">About</a></li>
 						<li><a href="Contact.html">Contact</a></li>
 						</ul>
-						</div>
-					<div class="nav-collapse collapse">
+					</div>
+				</div>
+						<div class="nav-collapse collapse">
 						<ul class="nav navbar-nav pull-right username"><li><a class="nav nav-collapse" href="includes/logout.php">logout</a></li>
 					</div><!--/.nav-collapse -->
-				</div>
 			</div>
 		</nav>
 		
