@@ -8,7 +8,7 @@ include_once 'includes/functions.php';
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Registration Form</title>
+        <title>Register &middot; Notes</title>
         <script type="text/JavaScript" src="js/sha512.js"></script> 
         <script type="text/JavaScript" src="js/forms.js"></script>
         <link rel="stylesheet" href="styles/bootstrap.css" />
@@ -23,15 +23,15 @@ include_once 'includes/functions.php';
 	<!-- NAVBAR
     ================================================== -->
     
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-inner">
-        <div class="container">
+        <div class="container-fluid">
 			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="brand" href="index.php">loci Notes</a>
+			<a class="brand" href="index.php">Notes</a>
 			<div class="nav-collapse collapse">
             <ul class="nav">
 				<li class="active"><a href="#">Home</a></li>
@@ -41,7 +41,7 @@ include_once 'includes/functions.php';
 			</div><!--/.nav-collapse -->
         </div>
     </div>
-    </div>
+    </nav>
 	
 	<div class="container">
         <h1>Register with us</h1>

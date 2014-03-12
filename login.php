@@ -15,7 +15,7 @@ if (login_check($mysqli) == true) {
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-    <title>Sign in &middot; loci Notes</title>
+    <title>Sign in &middot; Notes</title>
 
     <!-- Le styles -->
     <link href="styles/bootstrap.css" rel="stylesheet">
@@ -69,7 +69,7 @@ if (login_check($mysqli) == true) {
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="brand" href="index.php">loci Notes</a>
+			<a class="brand" href="index.php">Notes</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li><a href="index.php">Home</a></li>

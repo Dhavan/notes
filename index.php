@@ -9,7 +9,7 @@
   <html lang="en">
   <head>
 	<meta charset="utf-8">
-	<title>Home &middot; loci Notes</title>
+	<title>Home &middot; Notes</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -44,7 +44,7 @@
           <div class="navbar-header">
   
       <a class="navbar-brand" href="#">Notes</a>
-    </div>
+      </div>
 
           <div class="nav-collapse">
             <ul class="nav navbar-nav">
@@ -54,9 +54,11 @@
       				<?php if (login_check($mysqli) == true) { ?>
   	     			<li><a href="userNotes.php">Notes</a></li>
             </ul>
-            <div class="navbar-right">
-  				    <ul class="username nav navbar-nav"><li><a class="username">Hello, <?php echo htmlentities($_SESSION['username']);?></a></li>
-					<li><a class="nav nav-collapse " href="includes/logout.php">&middot; logout</a></ul>
+            <div class="navbar-right navbar-collapse">
+  				    <ul class="username nav navbar-nav">
+                <li><a class="username">Hello, <?php echo htmlentities($_SESSION['username']);?></a></li>
+					       <li><a class="nav nav-collapse " href="includes/logout.php">&middot; logout</a>
+              </ul>
 			</div>
 				    <?php }else { ?>				
             </ul>

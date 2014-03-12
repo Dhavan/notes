@@ -1,47 +1,62 @@
 <?php
 
-include_once 'includes/db_connect.php';
-include_once 'includes/psl-config.php';
-include_once 'includes/functions.php';
+/*#
+#	Removes the note based on the ID of the note.
+#	Takes GET variable value of note id
+#	Checks for GET arguements
+#	Checks weather the user is allowed to delete the note.
+#	If note, the user is forced-logged out.
+#
+#*/
 
-sec_session_start();
+	include_once 'includes/db_connect.php';
+	include_once 'includes/psl-config.php';
+	include_once 'includes/functions.php';
 
-if(isset($_SESSION['username'], $_GET['note_id'])){
+	sec_session_start();
 
-	$username = filter_input(INPUT_GET, 'username', FILTER_SANITIZE_STRING);
-	$noteId = filter_input(INPUT_GET, 'note_id', FILTER_SANITIZE_NUMBER_INT);
-	$noteId = $noteId + 0;
-	
-	$stmt = $mysqli->prepare("SELECT id FROM note WHERE note_id = ?");
-	$stmt->bind_param("i", $noteId);
-	$stmt->execute();
-	$stmt->bind_result($userId);
-	$stmt->fetch();
-	
-	if($_SESSION['user_id'] != $userId)
-	{
+	if(isset($_SESSION['username'], $_GET['note_id'])){		//check GET arguments
+
+
+		//Senitize all the GET values
+		$username = filter_input(INPUT_GET, 'username', FILTER_SANITIZE_STRING);
+		$noteId = filter_input(INPUT_GET, 'note_id', FILTER_SANITIZE_NUMBER_INT);
+		$noteId = $noteId + 0;
+
+		//Prepare mysql statements to select the matching note and user id
+		$stmt = $mysqli->prepare("SELECT id FROM note WHERE id = ? AND note_id=? LIMIT 1");
+		$stmt->bind_param("ii",  $_SESSION['user_id'], $noteId);
+		$stmt->execute();
+		$stmt->bind_result($userId);
+		$stmt->fetch();
+
 		
-		header('Location: includes/logout.php');
+		if($_SESSION['user_id'] != $userId || (!$userId))		//if there's no value from db or, the userids don't match, logout!
+		{
+
+			header('Location: includes/logout.php');
+			
+		}
+
+		//if mysql selection goes smoothly, proceed to remove the note
+		else{
 		
+			$mysqli2 = new mysqli(HOST, USER, PASSWORD, DATABASE);
+			
+			$stmt2 = $mysqli2->prepare("DELETE FROM note WHERE note_id = ?");
+			$stmt2->bind_param("i", $noteId);
+			$stmt2->execute();
+			
+			$mysqli2->close();
+
+			header('Location: userNotes.php');
+		}
+
 	}
-	
-	$mysqli2 = new mysqli(HOST, USER, PASSWORD, DATABASE);
-	
-	$stmt2 = $mysqli2->prepare("DELETE FROM note WHERE note_id = $noteId");
-	$stmt2->bind_param("i", $noteId);
-	$stmt2->execute();
-	
-	$stmt3 = $mysqli2->prepare("SELECT * FROM note");
-	$stmt3->execute();
-	$stmt3->store_result();
-	
-	$mysqli2->close();
-	
-	header('Location: userNotes.php');
-}
 
-else {
-	echo "Something is wrong. Please" . "<a href='userNotes.php'>Go back</a>";
-}
+	//there has been something wrong with the GET values. redirect back.
+	else {
+		echo "Something is wrong. Please" . "<a href='userNotes.php'>Go back</a>";
+	}
 
 ?>

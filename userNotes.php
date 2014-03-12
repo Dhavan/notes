@@ -47,26 +47,28 @@ if(login_check($mysqli) == false)
 		<!-- NAVBAR
 		================================================== -->
     
-		<div class="navbar navbar-inverse navbar-fixed-top">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="navbar-inner">
-				<div class="container">
+				<div class="container-fluid">
 					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					</button>
-					<a class="brand" href="index.php">loci Notes</a>
+					<a class="brand" href="index.php">Notes</a>
 					<div class="nav-collapse collapse">
 						<ul class="nav">
 						<li class="active"><a href="index.php">Home</a></li>
 						<li><a href="about.html">About</a></li>
 						<li><a href="Contact.html">Contact</a></li>
 						</ul>
-						<ul><li><a class="nav nav-collapse pull-right" href="includes/logout.php">logout</a></li>
+						</div>
+					<div class="nav-collapse collapse">
+						<ul class="nav navbar-nav pull-right username"><li><a class="nav nav-collapse" href="includes/logout.php">logout</a></li>
 					</div><!--/.nav-collapse -->
 				</div>
 			</div>
-		</div>
+		</nav>
 		
 		<div class="container-fluid">
 		  <div class="row-fluid">
@@ -88,6 +90,11 @@ if(login_check($mysqli) == false)
 			<div class="span9">
 				<div class="hero-unit">
 					<h2>Hello, <?php echo htmlentities($_SESSION['username']); ?>!</h1>
+
+					<form method="post" action="addNote.php" >
+						<input class="input-block-level" type="text" id="note" name="note" placeholder="note" />
+						<button class="btn" type="submit" onclick="formnote(this.form, this.note);">add</button>
+					</form>
 					
 					<!-- making the list of all added notes -->
 					
@@ -102,20 +109,18 @@ if(login_check($mysqli) == false)
 						echo "<ul>";						
 						
 						while($result = $stmt->fetch()) {
-							printf("<li> %s    ", $note);
+							printf("<li>%d %s    ", $id, $note);
 							printf("<a href='delNote.php?note_id=%d' >Remove</a></li>",$note_id);
 							
 						}
 						echo "</ul>";
 						
+						echo "userid:" . $_SESSION['user_id'];
 					?>
 					
 					<!-- end -->
 					
-					<form method="post" action="addNote.php" >
-						<input class="input-block-level" type="text" id="note" name="note" placeholder="note" />
-						<button class="btn" type="submit" onclick="formnote(this.form, this.note);">add</button>
-					</form>
+					
 					
 				</div>
 			</div>

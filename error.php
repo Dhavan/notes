@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Secure Login: Error</title>
+        <title>Notes &middot; Error</title>
         <link rel="stylesheet" href="styles/main.css" />
     </head>
     <body>
