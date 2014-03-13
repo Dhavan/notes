@@ -14,25 +14,8 @@ if(login_check($mysqli) == false)
 	<head>
 		<meta charset="UTF-8">
 		<title><?php echo htmlentities($_SESSION['username']); ?>'s Notes</title>
-		<link rel="stylesheet" href="css/bootstrap.css">
-		
-		<style type="text/css">
-			
-			.sidebar-nav {
-				padding: 9px 0;
-			}
-			
-			@media (max-width: 980px) {
-			/* Enable use of floated navbar text */
-				.navbar-text.pull-right {
-					float: none;
-					padding-left: 5px;
-					padding-right: 5px;
-				}
-			}
-		</style>
-		
-		<link rel="text/javascript" href="css/bootstrap-responsive">
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/bootstrap-responsive.css" rel="stylesheet">
 		<script type="text/JavaScript" src="js/sha512.js"></script>
 		
 	</head>
@@ -43,24 +26,27 @@ if(login_check($mysqli) == false)
 		================================================== -->
     
 		<nav class="navbar navbar-inverse" role="navigation">
-        	<div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
-  
-					<a class="brand" href="index.php">Notes</a>
-					<div class="nav-collapse collapse">
-						<ul class="nav">
+					<a class="navbar-brand" href="#">Notes</a>
+				</div>
+				<div class="nav-collapse">
+					<ul class="nav navbar-nav">
 						<li class="active"><a href="index.php">Home</a></li>
 						<li><a href="about.html">About</a></li>
 						<li><a href="Contact.html">Contact</a></li>
-						</ul>
-					</div>
+					</ul>
 				</div>
-						<div class="nav-collapse collapse">
-						<ul class="nav navbar-nav pull-right username"><li><a class="nav nav-collapse" href="includes/logout.php">logout</a></li>
-					</div><!--/.nav-collapse -->
+				<div class="nav-collapse">
+					<ul class="nav navbar-nav pull-right">
+						<li><a class="nav nav-collapse" href="includes/logout.php">logout</a></li>
+					</ul>
+				</div>
 			</div>
 		</nav>
+		
+		
 		
 		<div class="container-fluid">
 		  <div class="row-fluid">
@@ -80,12 +66,14 @@ if(login_check($mysqli) == false)
 			</div><!--/span-->
 			
 			<div class="span9">
-				<div class="hero-unit">
-					<h2>Hello, <?php echo htmlentities($_SESSION['username']); ?>!</h1>
-
+			
+				<div class="well">
 					<form method="post" action="addNote.php" >
-						<input class="input-block-level" type="text" id="note" name="note" placeholder="note" />
-						<button class="btn" type="submit" onclick="formnote(this.form, this.note);">add</button>
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input class="form-control" type="text" id="note" name="note" placeholder="Note" />
+						</div>
+						<button class="btn btn-primary btn-sm btn-block" type="submit" onclick="formnote(this.form, this.note);">add</button>
 					</form>
 					
 					<!-- making the list of all added notes -->
@@ -98,10 +86,10 @@ if(login_check($mysqli) == false)
 						$stmt->store_result();
 						$stmt->bind_result($id, $note_id, $note);
 						
-						echo "<ul>";						
+						echo "<ul class='list-group'>";						
 						
 						while($result = $stmt->fetch()) {
-							printf("<li>%d %s    ", $id, $note);
+							printf("<li class='list-group-item'>%d %s    ", $id, $note);
 							printf("<a href='delNote.php?note_id=%d' >Remove</a></li>",$note_id);
 							
 						}
@@ -111,11 +99,10 @@ if(login_check($mysqli) == false)
 					?>
 					
 					<!-- end -->
-					
-					
-					
 				</div>
 			</div>
+		   </div>
+		</div>
 			
 			<div class="container">
 			<hr>
@@ -123,6 +110,10 @@ if(login_check($mysqli) == false)
 				<p>&copy; 2013 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
 			</footer>
 		</div>
+
+		<script src="js/bootstrap.js"></script>
+  		<script src="js/bootstrap.min.js"></script>
+      	<script src="js/jQuery.js"></script>
 		
 	</body>
 </html>

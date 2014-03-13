@@ -41,20 +41,19 @@
       <nav class="navbar navbar-inverse" role="navigation">
         <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-  
-      <a class="navbar-brand" href="#">Notes</a>
-      </div>
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Notes</a>
+			</div>
 
-          <div class="nav-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-      				<?php if (login_check($mysqli) == true) { ?>
-  	     			<li><a href="userNotes.php">Notes</a></li>
-            </ul>
-            <div class="navbar-right navbar-collapse">
+			<div class="nav-collapse">
+				<ul class="nav navbar-nav">
+				  <li class="active"><a href="#">Home</a></li>
+				  <li><a href="#about">About</a></li>
+				  <li><a href="#contact">Contact</a></li>
+						<?php if (login_check($mysqli) == true) { ?>
+						<li><a href="userNotes.php">Notes</a></li>
+				</ul>
+				<div class="navbar-right navbar-collapse">
   				    <ul class="username nav navbar-nav">
                 <li><a class="username">Hello, <?php echo htmlentities($_SESSION['username']);?></a></li>
 					       <li><a class="nav nav-collapse " href="includes/logout.php">&middot; logout</a>
