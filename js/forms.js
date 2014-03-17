@@ -88,3 +88,9 @@ function regformhash(form, uid, email, password, conf) {
     form.submit();
     return true;
 }
+
+function formnote(form, note) {
+    if(note.value == '' || note.value == "")
+        return false;
+    form.submit();
+}
