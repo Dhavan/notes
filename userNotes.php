@@ -82,11 +82,11 @@ if(login_check($mysqli) == false)
 					<div class="note-spacer">
 						<?php
 							
-							$stmt = $mysqli->prepare("SELECT id, note_id, note FROM note WHERE id = ? LIMIT 0, 30");
+							$stmt = $mysqli->prepare("SELECT id, note_id, note, status FROM note WHERE id = ? LIMIT 0, 30");
 							$stmt->bind_param("i",$_SESSION['user_id']);
 							$stmt->execute();
 							$stmt->store_result();
-							$stmt->bind_result($id, $note_id, $note);
+							$stmt->bind_result($id, $note_id, $note, $status);
 							
 							echo "<ul class='list-group'>";						
 							
@@ -99,8 +99,14 @@ if(login_check($mysqli) == false)
 								$image_stmt->bind_result($attchment, $img);
 								$image_stmt->fetch();
 
-								printf("<li class='list-group-item'>%s    ", $note);
-								printf("<a class='pull-right' href='delNote.php?note_id=%d' >Remove</a></li>",$note_id);
+								if($status == 0){
+									printf("<li class='list-group-item'><input type='checkbox' data-target='http://localhost/notes/doneNote.php?note_id=%d&status=0' name='note' value='%d'>  %s", $note_id, $note_id,$note);
+									printf("<a class='pull-right' href='delNote.php?note_id=%d' >Remove</a></li>",$note_id);
+								}
+								else if($status == 1){
+									printf("<li class='list-group-item'><li class='list-group-item'><input type='checkbox' data-target='http://localhost/notes/doneNote.php?note_id=%d&status=1' name='note' value='%d' checked><strike> %s </strike>", $note_id, $note_id, $note);
+									printf("<a class='pull-right' href='delNote.php?note_id=%d' >Remove</a></li>",$note_id);
+								}
 								if($img){
 									echo '<li><img src="' . $img . '" />';
 									printf("<a class='' href='delAttach.php?attach_id=%d' >Remove</a></li>",$attchment);
@@ -131,6 +137,22 @@ if(login_check($mysqli) == false)
       		window.onload=function () {
       			document.getElementById("note").focus();
       		}
+
+      		$(function () {
+      			$("input[type='checkbox']").change(function (){
+      				var item = $(this);
+      				if(item.is(":checked"))
+      				{
+      					window.location.href=item.data("target");
+      				}
+      				else
+      				{
+      					window.location.href=item.data("target");
+      				}
+      			});
+      		});
+
+
       	</script>
 		
 	</body>
