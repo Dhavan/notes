@@ -1,8 +1,8 @@
 <?php
 
 /*#
-#	Removes the note based on the ID of the note.
-#	Takes GET variable value of note id
+#	Marks a task as done
+#	Takes GET variable value of note id, status (0/1)
 #	Checks for GET arguements
 #	Checks weather the user is allowed to delete the note.
 #	If note, the user is forced-logged out.
@@ -38,7 +38,7 @@
 			
 		}
 
-		//if mysql selection goes smoothly, proceed to remove the note
+		//if mysql selection goes smoothly, proceed to change the status
 		else{
 		
 			$mysqli2 = new mysqli(HOST, USER, PASSWORD, DATABASE);

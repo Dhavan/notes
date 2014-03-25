@@ -66,41 +66,39 @@ include_once 'includes/functions.php';
 		</div>
 		
 		<div class="container">
-        <form method="post" name="registration_form" action="<?php echo esc_url($_SERVER['PHP_SELF']); ?>">
-			<table>
-				<tr>
-				<td>Username:</td>
-				<td><input type='text' name='username' id='username' /></td>
-				</tr>
-				<tr>
-				<td>Email:</td>
-				<td><input type="text" name="email" id="email" /></td>
-				</tr>
-				<td>Password:</td>
-				<td><input type="password"
-								 name="password" 
-								 id="password"/></td>
-				</tr>
-				<tr>
-				<td>Confirm password:
-				<td><input type="password" 
-										 name="confirmpwd" 
-										 id="confirmpwd" /></td>
-				</tr>
-				<tr>
-				<td colspan="2" align="center">
-				<input type="button" 
-					   value="Register" 
-					   onclick="return regformhash(this.form,
-									   this.form.username,
-									   this.form.email,
-									   this.form.password,
-									   this.form.confirmpwd);" /> </td>
-				</tr>
-			</table>
-        </form>
-        <p>Return to the <a href="index.php">login page</a>.</p>
-		
+	        <form method="post" name="registration_form" action="<?php echo esc_url($_SERVER['PHP_SELF']); ?>">
+				<table>
+					<tr>
+					<td>Username:</td>
+					<td><input type='text' name='username' id='username' /></td>
+					</tr>
+					<tr>
+					<td>Email:</td>
+					<td><input type="text" name="email" id="email" /></td>
+					</tr>
+					<td>Password:</td>
+					<td><input type="password"
+									 name="password" 
+									 id="password"/></td>
+					</tr>
+					<tr>
+					<td>Confirm password:
+					<td><input type="password" 
+											 name="confirmpwd" 
+											 id="confirmpwd" /></td>
+					</tr>
+					<tr>
+					<td colspan="2" align="center">
+					<input type="button" 
+						   value="Register" 
+						   onclick="return regformhash(this.form,
+										   this.form.username,
+										   this.form.email,
+										   this.form.password,
+										   this.form.confirmpwd);" /> </td>
+					</tr>
+				</table>
+	        </form>		
 		</div>
 		
 		<div class="container">

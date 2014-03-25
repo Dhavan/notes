@@ -1,4 +1,8 @@
 <?php
+
+/*Displays a webpage showing a list of notes and option for new task
+Shows striked text if the task has been marked as done, normal otherwise.*/
+
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 include_once 'includes/psl-config.php';
@@ -6,7 +10,8 @@ include_once 'includes/psl-config.php';
 sec_session_start();
 
 if(login_check($mysqli) == false)
-	header('Location: login.php');
+	header('Location: index.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +21,13 @@ if(login_check($mysqli) == false)
 		<title><?php echo htmlentities($_SESSION['username']); ?>'s Notes</title>
 		<link href="css/main.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
-		<link href="css/bootstrap-responsive.css" rel="stylesheet">		
+		<link href="css/bootstrap-responsive.css" rel="stylesheet">
+		<style type="text/css">
+		body
+		{
+			margin-top: 60px;
+		}
+		</style>
 	</head>
 	
 	<body>
@@ -24,26 +35,42 @@ if(login_check($mysqli) == false)
 		<!-- NAVBAR
 		================================================== -->
     
-		<nav class="navbar navbar-inverse" role="navigation">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">Notes</a>
+					<a class="navbar-brand" href="index.php">Notes</a>
 				</div>
 				<div class="nav-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="index.php">Home</a></li>
+						<li><a href="index.php">Home</a></li>
 						<li><a href="about.html">About</a></li>
 						<li><a href="Contact.html">Contact</a></li>
-					</ul>
-				</div>
-				<div class="nav-collapse">
-					<ul class="nav navbar-nav pull-right">
-						<li><a class="nav nav-collapse" href="includes/logout.php">logout</a></li>
-					</ul>
-				</div>
+						<?php if (login_check($mysqli) == true) { ?>
+						<li class="active"><a href="userNotes.php">Notes</a></li>
+				</ul>
+				<div class="navbar-right navbar-collapse">
+  				    <ul class="username nav navbar-nav">
+                <li><a class="username">Hello, <?php echo htmlentities($_SESSION['username']);?></a></li>
+					       <li><a class="nav nav-collapse " href="includes/logout.php">&middot; logout</a>
+              </ul>
 			</div>
-		</nav>
+				    <?php }else { ?>				
+            </ul>
+            <?php } ?>
+            <?php if (!login_check($mysqli)) { ?>
+  			
+            <form class="navbar-form navbar-right" action="includes/process_login.php" method="POST" name="login_form">
+				<div class="form-group">
+  				    <input class="span2 form-control" type="text" name="email" placeholder="Email"/>
+  				    <input class="span2 form-control" type="password" name="password" id="password" placeholder="passowrd" />
+				</div>
+  				    <button class="btn" type="submit" onclick="return formhash(this.form, this.form.password);">Sign in</button>
+            </form>
+  		      <?php } ?>
+  			</div>
+		</div>
+	   </nav>
 		
 		
 		
@@ -67,9 +94,9 @@ if(login_check($mysqli) == false)
 			<div class="span9">
 			
 				<div class="well">
-					<form method="post" action="addNote.php" name="addNote"  enctype="multipart/form-data" onsubmit="return formnote(this.form, this.note this.file);">
+					<form method="post" action="addNote.php" name="addNote"  enctype="multipart/form-data" onsubmit="return formnote(this.form, this.note);">
 						<div class="input-group">
-							<input class="form-control" type="text" id="note" name="note" placeholder="Note" />
+							<input class="form-control" type="text" id="note" name="note" placeholder="Note" autofocus />
 							<input class="form-control" type="file" name="file" id="file" /	>
 							<input class="form-control btn-primary" type="submit" />
 						</div>
@@ -104,7 +131,7 @@ if(login_check($mysqli) == false)
 									printf("<a class='pull-right' href='delNote.php?note_id=%d' >Remove</a></li>",$note_id);
 								}
 								else if($status == 1){
-									printf("<li class='list-group-item'><li class='list-group-item'><input type='checkbox' data-target='http://localhost/notes/doneNote.php?note_id=%d&status=1' name='note' value='%d' checked><strike> %s </strike>", $note_id, $note_id, $note);
+									printf("<li class='list-group-item'><input type='checkbox' data-target='http://localhost/notes/doneNote.php?note_id=%d&status=1' name='note' value='%d' checked><strike> %s </strike>", $note_id, $note_id, $note);
 									printf("<a class='pull-right' href='delNote.php?note_id=%d' >Remove</a></li>",$note_id);
 								}
 								if($img){
@@ -134,10 +161,7 @@ if(login_check($mysqli) == false)
       	<script src="js/forms.js"></script>
       	<script type="text/JavaScript" src="js/sha512.js"></script>
       	<script type="text/javascript">
-      		window.onload=function () {
-      			document.getElementById("note").focus();
-      		}
-
+      		
       		$(function () {
       			$("input[type='checkbox']").change(function (){
       				var item = $(this);
@@ -153,10 +177,6 @@ if(login_check($mysqli) == false)
       		});
 
 
-      	</script>
-		
+      	</script>		
 	</body>
 </html>
-	
-		
-		

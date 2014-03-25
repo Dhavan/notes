@@ -22,7 +22,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="brand" href="index.php">loci Notes</a>
+			<a class="brand" href="index.php">Notes</a>
 			<div class="nav-collapse collapse">
             <ul class="nav">
 				<li class="active"><a href="#">Home</a></li>
@@ -35,7 +35,7 @@
     </div>
 	
 	<div class="container">
-        <h1>One step closer to us, and towards becoming a Sherlock!</h1>
+        <h1>One step closer to us!</h1>
         <p>You can now go back to the <a href="index.php">login page</a> and log in</p>
 	</div>
     </body>
